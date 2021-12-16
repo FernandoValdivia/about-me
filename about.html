@@ -93,6 +93,36 @@
                </div>
             </div>
             <div class="row margin-top-45">
+               <div class="col-md-12">
+                  <div class="col-md-3">
+                     <h2>Certificates</h2>
+                  </div>
+                  <!--
+                     <div class="col-md-9">
+                  <div class="card-carousel">
+                     <div class="my-card">
+                     <img src="https://elcomercio.pe/resizer/pKXMIbNCKzSmq92DwRqzpvLXUWk=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/CK3ED7TL6BG5XK2PD46PKMUFCY.jpg" alt="">
+                     </div>
+                     <div class="my-card">
+                     <img src="https://elcomercio.pe/resizer/pKXMIbNCKzSmq92DwRqzpvLXUWk=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/CK3ED7TL6BG5XK2PD46PKMUFCY.jpg" alt="">
+                     </div>
+                     <div class="my-card">
+                     <img src="https://elcomercio.pe/resizer/pKXMIbNCKzSmq92DwRqzpvLXUWk=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/CK3ED7TL6BG5XK2PD46PKMUFCY.jpg" alt="">
+                     </div>
+                     <div class="my-card">
+                     <img src="https://elcomercio.pe/resizer/pKXMIbNCKzSmq92DwRqzpvLXUWk=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/CK3ED7TL6BG5XK2PD46PKMUFCY.jpg" alt="">
+                     </div>
+                     <div class="my-card">
+                     <img src="https://elcomercio.pe/resizer/pKXMIbNCKzSmq92DwRqzpvLXUWk=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/CK3ED7TL6BG5XK2PD46PKMUFCY.jpg" alt="">
+                     </div>
+                  </div>
+                  </div>
+                  -->
+                  
+               </div>
+            </div>
+            </div>
+            <div class="row margin-top-45">
                <div class="col-md-3">
                   <h2>Clients</h2>
                </div>
@@ -100,9 +130,9 @@
                   <div class="row">
                      <div class="col-md-12">
                         <ul class="list-unstyled">
-                           <li><a href="https://modasa.com.pe/nosotros/" target="_blank">MODASA</a></li>
-                           <li><a href="https://www.gob.pe/inaigem" target="_blank">INAIGEM</a></li>
-                           <li><a href="https://www.tecsup.edu.pe/acerca-de-tecsup" target="_blank">TECSUP</a></li>
+                           <li> <a href="https://modasa.com.pe/nosotros/" target="_blank"> MODASA</a></li>
+                           <li> <a href="https://www.gob.pe/inaigem" target="_blank"> INAIGEM</a></li>
+                           <li> <a href="https://www.tecsup.edu.pe/acerca-de-tecsup" target="_blank"> TECSUP</a></li>
                         </ul>
                      </div>
                   </div>
@@ -115,5 +145,50 @@
       <script src="js/bootstrap.min.js"></script>
       <script src="js/modernizr.js"></script>
       <script src="js/script.js"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
+      <script>
+      $num = $('.my-card').length;
+      $even = $num / 2;
+      $odd = ($num + 1) / 2;
+
+      if ($num % 2 == 0) {
+         $('.my-card:nth-child(' + $even + ')').addClass('active');
+         $('.my-card:nth-child(' + $even + ')').prev().addClass('prev');
+         $('.my-card:nth-child(' + $even + ')').next().addClass('next');
+      } else {
+         $('.my-card:nth-child(' + $odd + ')').addClass('active');
+         $('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
+         $('.my-card:nth-child(' + $odd + ')').next().addClass('next');
+      }
+
+      $('.my-card').click(function() {
+         $slide = $('.active').width();
+         console.log($('.active').position().left);
+         
+         if ($(this).hasClass('next')) {
+            $('.card-carousel').stop(false, true).animate({left: '-=' + $slide});
+         } else if ($(this).hasClass('prev')) {
+            $('.card-carousel').stop(false, true).animate({left: '+=' + $slide});
+         }
+         
+         $(this).removeClass('prev next');
+         $(this).siblings().removeClass('prev active next');
+         
+         $(this).addClass('active');
+         $(this).prev().addClass('prev');
+         $(this).next().addClass('next');
+      });
+
+
+      // Keyboard nav
+      $('html body').keydown(function(e) {
+         if (e.keyCode == 37) { // left
+            $('.active').prev().trigger('click');
+         }
+         else if (e.keyCode == 39) { // right
+            $('.active').next().trigger('click');
+         }
+      });
+      </script>
    </body>
 </html>
